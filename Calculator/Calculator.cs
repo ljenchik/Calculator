@@ -5,35 +5,45 @@
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the calculator!");
-            Console.WriteLine("===================");
+            Console.WriteLine("=========================");
             
             Console.WriteLine("Please enter the operator +, -, / or *: ");
             char math_sign = char.Parse(Console.ReadLine());
             
-            Console.Write("Enter the first number: ");
-            string firstNumber = Console.ReadLine();
-            decimal first = decimal.Parse(firstNumber);
-            
-            Console.Write("Enter the second number: ");
-            string secondNumber = Console.ReadLine();
-            decimal second = decimal.Parse(secondNumber);
+            Console.WriteLine("How many numbers do you want to " + $"{math_sign}" + " ?: ");
+            int quantity = int.Parse(Console.ReadLine());
 
-            if (math_sign == '+')
+            decimal[] numbers = new decimal[quantity];
+            
+            for (int i = 0; i < quantity; i++)
             {
-                Console.Write("{0} + {1} = {2}",  first, second, first + second);
+                Console.Write("Please enter number: ");
+                string num_str = Console.ReadLine();
+                decimal number = decimal.Parse(num_str);
+                numbers[i] = number;
             }
-            else if (math_sign == '-')
+
+            decimal res = numbers[0];
+            for (int i = 1; i < quantity; i++)
             {
-                Console.Write("{0} - {1} = {2}",  first, second, first - second);
+                if (math_sign == '+')
+                {
+                    res += numbers[i];
+                }
+                else if (math_sign == '-')
+                {
+                    res -= numbers[i];
+                }
+                else if (math_sign == '/')
+                {
+                    res /= numbers[i];
+                }
+                else if (math_sign == '*')
+                {
+                    res *= numbers[i];
+                }
             }
-            else if (math_sign == '/')
-            {
-                Console.Write("{0} / {1} = {2}",  first, second, first / second);
-            }
-            else if (math_sign == '*')
-            {
-                Console.Write("{0} * {1} = {2}",  first, second, first * second);
-            }
+            Console.WriteLine("The answer is {0}",res);
             Console.ReadLine();
         }
     }
